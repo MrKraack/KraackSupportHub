@@ -2,12 +2,11 @@
     <div>
       <h1>Ticket Details</h1>
       <div>
-        <p>ID: {{ ticket.TicketID }}</p>
-        <p>Requester: {{ ticket.TicketCreatedBy }}</p>
-        <p>Title: {{ ticket.TicketTitel }}</p>
-        <p>Priority: {{ ticket.TicketPriority }}</p>
-        <p>Category: {{ ticket.TicketCategory }}</p>
-        <p>Status: {{ ticket.TicketState }}</p>
+        <p>Requester: {{ ticketDetails.TicketCreatedBy }}</p>
+        <p>Title: {{ ticketDetails.TicketTitel }}</p>
+        <p>Priority: {{ ticketDetails.TicketPriority }}</p>
+        <p>Category: {{ ticketDetails.TicketCategory }}</p>
+        <p>Status: {{ ticketDetails.TicketState }}</p>
         <!-- Add more details as needed -->
       </div>
     </div>
@@ -16,12 +15,33 @@
   <script>
   // In your TicketDetailView.vue component
 export default {
+  data(){
+    return{
+
+      ticketDetails: null
+    }
+    
+  },
   props: {
     ticket: Object,
   },
-  created() {
-    console.log('Ticket Detail View created with prop:', this.ticket);
+  methods: {
+    async FetchData(){
+      let routerTicketId = this.$route.params.id;
+      console.log(routerTicketId)
+      let fetchedTicket = await fetch(`http://localhost:8081/tickets/${routerTicketId}`)
+      let convertTicket = await fetchedTicket.json()
+      console.log(convertTicket)
+      // this.ticketDetails = convertTicket;
+      
+
+
+    }
   },
+  mounted(){
+    this.FetchData()
+    
+  }
 };
 
   </script>

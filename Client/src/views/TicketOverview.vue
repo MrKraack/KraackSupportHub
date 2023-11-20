@@ -17,7 +17,8 @@
                 </thead>
 
                 <tbody>
-                    <tr v-for="ticket in ticketData" :key="ticket.TicketID" @click="goToTicketDetail(ticket)">                        <td>{{ ticket.TicketID }}</td>
+                    <tr v-for="ticket in ticketData" :key="ticket.TicketID" @click="goToTicketDetail(ticket)"> 
+                        <td>{{ ticket.TicketID }}</td>
                         <td>{{ ticket.TicketCreatedBy }}</td>
                         <td>{{ ticket.TicketTitel }}</td>
                         <td>{{ ticket.TicketPriority }}</td>
@@ -50,10 +51,10 @@ export default {
             console.log(this.ticketData)
 
         },
-        goToTicketDetail(ticket) {
-    console.log('Navigating to Ticket Detail with:', ticket);
-    this.$router.push({ name: 'ticketDetail', params: { id: ticket.TicketID }, props: { ticket } });
-  },
+        async goToTicketDetail(ticket) {
+            console.log('Navigating to Ticket Detail with:', ticket);
+            await this.$router.push({ name: 'ticketDetail', params: { id: ticket.TicketID }, props: { ticket } });
+        },
         sortBy(key) {
             // If the same key is clicked again, reverse the order
             if (key === this.sortKey) {

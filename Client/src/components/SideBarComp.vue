@@ -1,0 +1,58 @@
+<template>
+    <div class="navBar">
+      <img src="" alt="logo" class="logoNav" />
+      <nav>
+        <router-link to="/dashboard" >Dashboard</router-link>
+        <router-link to="/Tickets">Tickets</router-link>
+        <router-link to="/Business">Business</router-link>
+        <router-link to="/Settings">Settings</router-link>
+        <router-link to="/Help">Help</router-link>
+      </nav>
+    </div>
+  </template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style lang="scss" scoped>
+.navBar {
+  display: flex;
+  width: 10%;
+  background-color: #363636;
+  flex-direction: column;
+  height: 95vh;
+  position: fixed;
+
+  nav {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    img {
+      background: red;
+      width: 100px;
+      height: 100px;
+    }
+
+    // Use 'a' for styling
+    a {
+      text-decoration: none;
+      padding: 1rem;
+      text-decoration: none;
+      font-weight: normal;
+      color: #898888;
+      font-size: 20px;
+      font-style: normal;
+      line-height: normal;
+
+      // Use 'router-link-active' for active link styling
+      &.router-link-active {
+        color: #ff5733;
+      }
+    }
+  }
+}
+</style>

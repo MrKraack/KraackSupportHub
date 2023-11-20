@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
-const TicketSchema = mongoose.Schema({
-    TicketID: { type: Number, default: null },
+const ticketSchema = new mongoose.Schema({
+    TicketID: { type: String, default: null },
     TicketTitel: { type: String, default: null },
     TicketDescription: { type: String, default: null },
     TicketState: { type: String, default: null },
@@ -15,6 +15,6 @@ const TicketSchema = mongoose.Schema({
     TicketComments: [{type: String}]
 },{collection: "Tickets"})
 
-const TicketModel = mongoose.model('tickets', TicketSchema)
+const ticketModel = mongoose.model('ticketModel', ticketSchema)
 
-module.exports = TicketModel
+module.exports = ticketModel

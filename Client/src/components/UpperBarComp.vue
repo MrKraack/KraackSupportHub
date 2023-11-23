@@ -14,7 +14,6 @@
 
 <style lang="scss" scoped>
 .upperBar{
-    width: 100%;
     display: flex;
   margin-left: 10%;
   background-color: #121212;

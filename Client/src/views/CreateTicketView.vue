@@ -4,17 +4,21 @@
             <h1>Create Ticket</h1>
         </div>
         <div class="createTicketData">
-            <form @submit.prevent="submitTicketData" action="createTicket">                <div>
+            <form @submit.prevent="submitTicketData">
+                <div>
                     <label for="nameInput">Requester</label>
-                    <input v-model="ticketData.reqTicketCreatedBy" type="text" id="nameInput" name="nameInput" placeholder="Name">
+                    <input v-model="ticketData.reqTicketCreatedBy" type="text" id="nameInput" name="nameInput"
+                        placeholder="Name">
                 </div>
                 <div>
                     <label for="ticketTitle">Title</label>
-                    <input v-model="ticketData.reqTicketTitel" type="text" id="ticketTitle" name="ticketTitle" placeholder="Title">
+                    <input v-model="ticketData.reqTicketTitel" type="text" id="ticketTitle" name="ticketTitle"
+                        placeholder="Title">
                 </div>
                 <div>
                     <label for="ticketDescription">Description</label>
-                    <textarea v-model="ticketData.reqTicketDescription" type="text" id="ticketDescription" name="ticketDescription" placeholder="Description of ticket"></textarea>
+                    <textarea v-model="ticketData.reqTicketDescription" type="text" id="ticketDescription"
+                        name="ticketDescription" placeholder="Description of ticket"></textarea>
                 </div>
                 <div class="selectionContainer">
                     <div>
@@ -48,9 +52,10 @@
 </template>
 
 <script>
+import router from '@/router';
 import axios from 'axios';
 export default {
-    data(){
+    data() {
         return {
             ticketData: {
                 reqTicketTitel: "",
@@ -62,7 +67,7 @@ export default {
 
         }
     },
-    methods:{
+    methods: {
         async submitTicketData() {
             try {
                 console.log(this.ticketData)
@@ -71,6 +76,7 @@ export default {
                 if (response.status === 200) {
                     // Handle success
                     console.log('Ticket created successfully');
+                    router.push({name: "tickets"})
                 } else {
                     // Handle error
                     console.error('Failed to create ticket');
@@ -106,7 +112,8 @@ export default {
             div {
                 width: 100%;
             }
-            textarea{
+
+            textarea {
                 width: 100%;
                 resize: none;
             }
@@ -140,12 +147,12 @@ export default {
 
                 display: block;
             }
-            .selectionContainer{
+
+            .selectionContainer {
                 display: flex;
             }
         }
 
 
     }
-}
-</style>
+}</style>

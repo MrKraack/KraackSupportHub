@@ -1,12 +1,8 @@
 const ticketModel = require("../../models/TicketModel")
 module.exports = async (req, res) => {
 
-    let theTicketID = req.params.id
-
-    console.log("this is req: ")
-    console.log(req.params)
-
     //Get id from params
+    let theTicketID = req.params.id
 
     //Get the variables
     let {
@@ -20,6 +16,8 @@ module.exports = async (req, res) => {
         reqTicketSubCategory,
         reqTicketComments
     } = req.body
+
+
 
     try {
 

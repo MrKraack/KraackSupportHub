@@ -16,6 +16,8 @@ module.exports = async (req, res) => {
         reqTicketSubCategory,
         reqTicketComments } = req.body
 
+    console.log(req)
+
     //Get the last element in todo Tasks and get the id from it
     //Search database for objects matching TicketModel
     const ticketCounter = await TicketModel.find({ TicketModel });
@@ -34,15 +36,24 @@ module.exports = async (req, res) => {
     let newTaskID = `supportTicket${ticketIdFromDB}`;
 
     try {
-        //Append date
-        let dateAdded;
+     
 
-        // Change dateformat from crazy shit to normal
+        // Get current Date
         const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const day = String(currentDate.getDate()).padStart(2, '0');
-        dateAdded = `${year}-${month}-${day}`;
+        const currentDateFormat = currentDate.toLocaleString(); // f.eks. 23/11/2023, 17.39
+        //Regex to match after the comma
+        const pattern = /(?<=, )[^,]+/;
+        //Match regex against currentDateFormat
+        const match = currentDateFormat.match(pattern);
+        const originalDateAndTime = currentDateFormat.split(', ')[0];
+        const extractedValue = match[0];
+        const result = `${originalDateAndTime}, KL:${extractedValue.replace(/\.\d+$/, '')}`;
+        console.log(result);
+
+
+
+
+        //
 
         // if (userID) {
         //     let userObject = await UserModel.findOne({ userID: userID });
@@ -59,7 +70,7 @@ module.exports = async (req, res) => {
             TicketState: reqTicketState,
             TicketDueDate: reqTicketDueDate,
             TicketAssigned: reqTicketAssigned,
-            TicketCreated: dateAdded,
+            TicketCreated: result,
             TicketPriority: reqTicketPriority,
             TicketCreatedBy: reqTicketCreatedBy,
             TicketCategory: reqTicketCategory,

@@ -6,11 +6,6 @@
         <div class="createTicketData">
             <form @submit.prevent="submitTicketData">
                 <div>
-                    <label for="nameInput">Requester</label>
-                    <input v-model="ticketData.reqTicketCreatedBy" type="text" id="nameInput" name="nameInput"
-                        placeholder="Name">
-                </div>
-                <div>
                     <label for="ticketTitle">Title</label>
                     <input v-model="ticketData.reqTicketTitel" type="text" id="ticketTitle" name="ticketTitle"
                         placeholder="Title">
@@ -71,6 +66,8 @@ export default {
         async submitTicketData() {
             try {
                 console.log(this.ticketData)
+                let ticketcreater = localStorage.getItem("userName")
+                this.ticketData.reqTicketCreatedBy = ticketcreater
                 const response = await axios.post('http://localhost:8081/tickets/create', this.ticketData);
 
                 if (response.status === 200) {

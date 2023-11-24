@@ -18,6 +18,7 @@ const readTicketsRoute = require('./routes/ticketRoutes/readTicketsRoute')
 const readTicketByIDRoute = require('./routes/ticketRoutes/readTicketByIDRoute')
 const deleteTicketsRoute = require('./routes/ticketRoutes/deleteTicketByIDRoute')
 const updateTicketRoute = require('./routes/ticketRoutes/updateTicketRoute')
+const readTicketsByUsernameRoute = require("./routes/ticketRoutes/readTicketsByNameRoute")
 
 // Businesses
 const createBusinessRoute = require('./routes/businessRoutes/createBusinessRoute')
@@ -45,7 +46,8 @@ router.delete('/user/:id', deleteUserRoute)
 // router.post('/todos/get', tokenAuth, readTodosRoute)
 router.post('/tickets/create', createTicketRoute)
 router.get('/tickets', readTicketsRoute)
-router.get('/tickets/:id', readTicketByIDRoute)
+router.get('/ticket/:id', readTicketByIDRoute)
+router.get('/tickets/:userName', readTicketsByUsernameRoute)
 router.put('/tickets/:id', updateTicketRoute)
 router.delete('/tickets/:id', deleteTicketsRoute)
 

@@ -3,6 +3,7 @@
         <router-link to="/createTicket"><img src="" alt="createTicket"></router-link>
         <router-link to="/register"><img src="" alt="register"></router-link>
         <router-link to="/login"><img src="" alt="login"></router-link>
+        <a @click="logoutFunction">Logout</a>
         
 
     </div>
@@ -10,6 +11,23 @@
 
 <script>
     export default {
+      data(){
+        return{
+
+        }
+      },
+      methods: {
+        logoutFunction() {
+      // Clear user-related information from localStorage
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userToken")
+
+      // Optionally, perform additional logout-related tasks
+
+      // Redirect the user to the login page or another desired page
+      this.$router.push('/login');  // Adjust the route as needed
+    }
+  }
         
     }
 </script>

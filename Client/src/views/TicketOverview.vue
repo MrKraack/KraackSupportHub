@@ -35,6 +35,8 @@
 </template>
 
 <script>
+
+
 export default {
     data() {
         return {
@@ -45,10 +47,16 @@ export default {
     },
     methods: {
         async FetchData() {
-            const response = await fetch("http://localhost:8081/tickets")
+            //Get userName from Localstorage
+            let localUsername = localStorage.getItem("userName");
+            console.log(localUsername)
+            let response = await fetch(`http://localhost:8081/tickets/${localUsername}`)
+            // const response = await fetch("http://localhost:8081/tickets")
             const listData = await response.json();
+            // this.ticketData = listData
             this.ticketData = listData
-            console.log(this.ticketData)
+            // console.log(this.ticketData)
+            console.log(listData)
 
         },
         goToTicketDetail(ticket) {

@@ -1,5 +1,6 @@
 const UserModel = require("../../models/UserModel")
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken");
 
 module.exports = async (req, res ) => {
 
@@ -16,7 +17,12 @@ module.exports = async (req, res ) => {
     userCount++;
     let newUserID = `user${userCount}`;
 
+
+
+
     try {
+
+        
 
        console.log(userCount)
         //Encrypt password using Bcrypt hashing
@@ -32,6 +38,17 @@ module.exports = async (req, res ) => {
             userEmail: reqUserEmail,
             userRole: "user",
         })
+
+        // Create token
+        const token = jwt.sign(
+            { user_id: newUser.userID, reqUserName },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "2h",
+            }
+        );
+        // save user token
+        newUser.token = token;
 
         newUser.save();
         res.status(200).json("User has been created");

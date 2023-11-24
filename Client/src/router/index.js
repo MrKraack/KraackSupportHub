@@ -4,6 +4,8 @@ import DashboardView from "../views/DashboardView.vue"
 import TicketOverview from "../views/TicketOverview.vue"
 import createTicketView from "../views/CreateTicketView.vue"
 import TicketDetailView from "../views/TicketDetailView.vue"
+import LoginView from "../views/LoginView.vue"
+import registerView from "../views/RegisterView.vue"
 
 const routes = [
   {
@@ -15,6 +17,16 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: DashboardView
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: registerView
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView
   },
   {
     path: '/tickets',

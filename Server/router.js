@@ -4,7 +4,7 @@ const express = require("express")
 
 //User
 const userRegisterRoute = require('./routes/userRoutes/createUserRoute')
-// const userLoginRoute = require('./routes/user/authUser')
+const userLoginRoute = require('./routes/userRoutes/userLoginRoute')
 // const userIsAuth = require('./routes/user/isAuth') //to authenticate, that user is logged in, when trying to go to page
 // const updateUser = require('./routes/user/updateUser')
 const readUserIDRoute = require('./routes/userRoutes/readUserByIDRoute')
@@ -34,7 +34,7 @@ const router = express.Router()
 
 //User routes
 router.post('/register', userRegisterRoute)
-// router.post('/login', userLoginRoute)
+router.post('/login', userLoginRoute)
 // router.put('/updateUser/:id', updateUser)
 router.get('/user/:id', readUserIDRoute)
 router.get('/users', readUserRoute)

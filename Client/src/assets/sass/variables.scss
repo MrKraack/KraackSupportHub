@@ -1,0 +1,46 @@
+
+  //Dark mode colors
+  $darkmode: #222222;
+  $darkmode-Boxes: #333333;
+  
+  //Gold gradients
+  $orangeGradient: linear-gradient(90deg, #FF4800 10%, #FF7400 71.04%);
+  
+  $niceGradient: linear-gradient(104deg, #6C00E9 0%, #FF8000 100%);
+  $niceGradientPackage: linear-gradient(90deg, #6C00E9 0%, #FF8000 100%);
+  $niceGradientBorder: linear-gradient(270deg, #6C00E9 0%, #FF8000 100%);
+  $niceGradientText: linear-gradient(104deg, #6C00E9 35%, #FF8000 60%);
+  $backgroundGradient: linear-gradient(200deg, #6C00E9 0%, #FF8000 100%);
+  
+  
+  //Mixins 
+  @mixin text-gradient($gradient) {
+    background: $gradient;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  @mixin border-bottom-gradient($gradient) {
+    border-image: $gradient 1;
+    border-bottom-style: solid;
+  }
+  
+  @mixin background-gradient($gradient) {
+    background: $gradient;
+  }
+  
+  @mixin text-stroke-gradient($gradient){
+    background: -webkit-linear-gradient(100deg, #6C00E9 10%, #FF8000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 2px transparent;
+    color: #ffffff;
+  }
+  
+  
+  
+  @mixin flex-and-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

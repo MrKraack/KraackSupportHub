@@ -5,7 +5,7 @@
             <h1>All Tickets</h1>
         </div>
 
-        <div class="ticketListContainer">
+        <div v-if="ticketData" class="ticketListContainer">
             <table class="ticketTable">
                 <thead>
                     <th @click="sortBy('TicketID')">ID</th>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+
 
 
 export default {

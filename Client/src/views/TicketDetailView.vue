@@ -13,6 +13,27 @@
         <p>{{ ticketDetails.TicketDescription }}</p>
       </div>
 
+      <div class="ticketCommentContainer">
+        <h2>Comments</h2>
+        <div class="addCommentSection">
+          <form @submit.prevent="addCommentToTicket">
+            <textarea v-model="ticketCommentInput">               
+             </textarea>
+            <input type="submit" value="Add Comment">
+          </form>
+        </div >
+        <ul>
+          <li v-for="comment in ticketDetails.TicketComments" :key="comment">
+            <div class="commentHeader">
+              <span><strong>{{ comment.creator }}</strong> - {{ comment.createdDate }}</span>
+            </div>
+            <div class="commentBody">
+              {{ comment.comment }}
+            </div>
+          </li>
+        </ul>
+      </div>
+
 
     </div>
 
@@ -40,27 +61,7 @@
       <div class="ticketDetailActions">
 
       </div>
-      <div class="ticketCommentContainer">
-        <div class="addCommentSection">
-          <form @submit.prevent="addCommentToTicket">
-
-            <textarea v-model="ticketCommentInput">
-
-                    </textarea>
-            <input type="submit" value="Add Comment">
-          </form>
-        </div>
-        <ul>
-          <li v-for="comment in ticketDetails.TicketComments" :key="comment">
-            <div class="commentHeader">
-              <span><strong>{{ comment.creator }}</strong> - {{ comment.createdDate }}</span>
-            </div>
-            <div class="commentBody">
-              {{ comment.comment }}
-            </div>
-          </li>
-        </ul>
-      </div>
+      
     </div>
 
 
@@ -87,8 +88,10 @@ export default {
     async FetchData() {
       //Get Ticket ID from Params
       let routerTicketId = this.$route.params.id;
+   
       //Fetch ticket from Database using ID
-      let fetchedTicket = await fetch(`http://localhost:8081/tickets/${routerTicketId}`)
+      let fetchedTicket = await fetch(`http://localhost:8081/ticket/${routerTicketId}`)  
+
       //Convert Ticket to JSON Object
       let convertTicket = await fetchedTicket.json()
       //Assign Ticket Object to Ticket Details
@@ -102,6 +105,7 @@ export default {
         let commentInput = this.ticketCommentInput;
         let creatorName = this.ticketDetails.TicketCreatedBy;
 
+        //#region Generate Date
         let currentDate = new Date();
         let currentDateFormat = currentDate.toLocaleString();
         let pattern = /(?<=, )[^,]+/;
@@ -111,6 +115,8 @@ export default {
         let originalDateAndTime = currentDateFormat.split(', ')[0];
         let extractedValue = match[0];
         let createDateFormat = `${originalDateAndTime}, KL:${extractedValue.replace(/\.\d+$/, '')}`;
+
+        //#endregion
 
         // Create an object with comment and creator's name
         let newComment = {
@@ -128,6 +134,7 @@ export default {
         // Update the ticket on MongoDB
         await axios.put(`http://localhost:8081/tickets/${this.ticketDetails.TicketID}`, {
           reqTicketComments: this.ticketDetails.TicketComments
+         
         });
 
 
@@ -165,16 +172,11 @@ export default {
         margin: 0px;
       }
     }
-
-
-
-  }
-
-  .detailSideBar {
-    height: 100vh;
-    width: 30%;
-
     .ticketCommentContainer {
+      width: 80%;
+      h2{
+        margin: 5%;
+      }
       .addCommentSection {
 
         form {
@@ -190,10 +192,26 @@ export default {
 
       }
 
-      ul li {
-        list-style-type: none;
+      ul{
+        display: flex;
+        justify-content: start;
+        padding: 0px;
+
+        li {
+          list-style-type: none;
+        }
       }
     }
+
+
+
+  }
+
+  .detailSideBar {
+    height: 100vh;
+    width: 30%;
+
+    
   }
 }
 </style>

@@ -16,15 +16,11 @@ module.exports = async (req, res) => {
         reqTicketSubCategory,
         reqTicketComments
     } = req.body
-
-
-
+    
+    
+    
     try {
-
-        //Get the Ticket
-
-        let currentTicketObject = await ticketModel.findOne({TicketID: theTicketID})
-
+                
         //Update Ticket with new info from updateVariable
         const updateModel = {
             TicketTitel: reqTicketTitel,
@@ -37,10 +33,13 @@ module.exports = async (req, res) => {
             TicketSubCategory: reqTicketSubCategory,
             TicketComments: reqTicketComments
         }
-
+        
+    
+        
+        
         //Save Ticket
-        const result = await ticketModel.updateOne(currentTicketObject, updateModel);    
-
+        let result = await ticketModel.updateOne({ TicketID: theTicketID }, updateModel);        console.log(result)   
+        
         res.status(200).json(`${currentTicketObject.TicketTitel} has been updated`)
         
     }

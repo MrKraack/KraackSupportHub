@@ -47,7 +47,7 @@ router.delete('/user/:id', deleteUserRoute)
 router.post('/tickets/create', createTicketRoute)
 router.get('/tickets', readTicketsRoute)
 router.get('/ticket/:id', readTicketByIDRoute)
-router.get('/tickets/:userName', readTicketsByUsernameRoute)
+router.get('/tickets/:id', readTicketsByUsernameRoute)
 router.put('/tickets/:id', updateTicketRoute)
 router.delete('/tickets/:id', deleteTicketsRoute)
 

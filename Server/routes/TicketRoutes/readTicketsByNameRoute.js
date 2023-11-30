@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     
     try {
         
-        console.log(req)
+        
         //Load all tickets, that have the same createdBy 
         let userTickets = await TicketModel.find({TicketCreatedBy: currentUsername})
 

@@ -3,12 +3,12 @@
         <form @submit.prevent="loginSubmit">
             <label for="loginUsername">Username</label>
             <input v-model="userInfo.reqUserName" id="loginUsername">
-            
+
             <label for="loginPassword">Password</label>
             <input v-model="userInfo.reqUserPassword" id="loginPassword">
 
             <button type="submit">Login</button>
-            
+
 
 
         </form>
@@ -20,47 +20,52 @@
 <script>
 import axios from 'axios';
 
-    export default {
-        data(){
-            return{
-                userInfo: {
-                    reqUserName: "",
-                    reqUserPassword: "",
-
-                }
+export default {
+    data() {
+        return {
+            userInfo: {
+                reqUserName: "",
+                reqUserPassword: "",
 
             }
-        },
-        methods: {
-            async loginSubmit(){
-                // console.log(this.userInfo)
-                console.log("Trigger")
-                let response = await axios.post("http://localhost:8081/login", this.userInfo)
-                console.log(response)
-                //If the login was a success, set token at localstorage and redirect to Tickets
-                if (response.status === 200 && response.data.userObject.token){
 
-                    localStorage.setItem("userToken", response.data.userObject.token)
+        }
+    },
+    methods: {
+        async loginSubmit() {
+            try {
+                console.log('Attempting login with user info:', this.userInfo);
+
+                let response = await axios.post("http://localhost:8081/login", this.userInfo);
+                console.log('Server Response:', response);
+                
+                
+
+               
+                //     // Redirect to Tickets
                     this.$router.push('/tickets');
-                    localStorage.setItem("userName", response.data.userObject.userName)
-                }
- 
-
+                
+            } catch (error) {
+                console.error('Error during login:', error);
+                // Handle login error as needed
             }
         }
-        
     }
+
+}
+
+
 </script>
 
 <style lang="scss" scoped>
-.loginContainer{
+.loginContainer {
     margin-left: 10%;
-    form{
+
+    form {
         display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 }
-
 </style>

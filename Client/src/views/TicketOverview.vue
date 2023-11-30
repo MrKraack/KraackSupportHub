@@ -35,7 +35,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 
 
 export default {
@@ -48,16 +48,21 @@ export default {
     },
     methods: {
         async FetchData() {
-            //Get userName from Localstorage
-            let localUsername = localStorage.getItem("userName");
-            console.log(localUsername)
-            let response = await fetch(`http://localhost:8081/tickets/${localUsername}`)
-            // const response = await fetch("http://localhost:8081/tickets")
-            const listData = await response.json();
-            // this.ticketData = listData
-            this.ticketData = listData
-            // console.log(this.ticketData)
-            console.log(listData)
+
+
+            try {
+                const response = await axios.get("http://localhost:8081/tickets", {
+                    withCredentials: true,
+                });
+
+                const listData = response.data;
+                console.log(listData);
+                // Handle your data here
+                this.ticketData = listData;
+            } catch (error) {
+                console.error("Axios error:", error);
+                // Handle errors
+            }
 
         },
         goToTicketDetail(ticket) {

@@ -8,33 +8,65 @@ module.exports = async (req, res) => {
 
   try {
     const userObject = await UserModel.findOne({ userName: reqUserName });
+
     if (!userObject) {
       console.log("User not found");
       return res.status(404).json({ error: 'User not found' });
     }
 
-    let userEmail = userObject.userEmail;
 
     if (await bcrypt.compare(reqUserPassword, userObject.userPassword)) {
-      const token = jwt.sign(
-        { user_id: userObject._id, userEmail },
-        process.env.JWT_SECRET,
+
+      const roles = userObject.userRole
+      console.log("this is user roles: ")
+      console.log(roles)
+
+      //create JWT
+      const accessToken = jwt.sign(
         {
-          expiresIn: "2h"
-        }
-      );
+          "UserInfo":
+          {
+            "userName": userObject.userName,
+            "roles": roles
+          }
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {expiresIn: "5m"}
+      )
+      
+      const refreshToken = jwt.sign(
+        {"userName": userObject.userName,},
+        process.env.REFRESH_TOKEN_SECRET,
+        {expiresIn: "1d"}
+      )
 
-      userObject.token = token;
+
+
+
+      userObject.accessToken = accessToken;
+      userObject.refreshToken = refreshToken;
+
+      await userObject.save();
+
       console.log("Login success");
+      // res.cookie('jwt', refreshToken, { httpOnly: false, sameSite: 'None', secure: false, maxAge: 24 * 60 * 60 * 1000 });
 
-      // Send the token in the response
-      return res.status(200).json({ userObject });
-    } else {
+      res.cookie('accessToken', accessToken, {
+        httpOnly: true,
+        sameSite: 'None',
+        maxAge: 1 * 60 * 60 * 1000, // (1 hour)
+      });
+      res.json({accessToken})
+
+    } 
+    
+    else {
       console.log("Invalid credentials");
       return res.status(400).json({ error: 'Invalid credentials' });
     }
+
   } catch (error) {
     console.error('Login error:', error.message);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json({ error: error.message });
   }
 };

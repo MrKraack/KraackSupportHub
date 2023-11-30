@@ -19,8 +19,8 @@
       methods: {
         logoutFunction() {
       // Clear user-related information from localStorage
-      localStorage.removeItem("userName");
-      localStorage.removeItem("userToken")
+   
+      localStorage.clear()
 
       // Optionally, perform additional logout-related tasks
 

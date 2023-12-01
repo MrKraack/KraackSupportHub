@@ -19,8 +19,7 @@
       methods: {
         logoutFunction() {
       // Clear user-related information from localStorage
-   
-      localStorage.clear()
+
 
       // Optionally, perform additional logout-related tasks
 

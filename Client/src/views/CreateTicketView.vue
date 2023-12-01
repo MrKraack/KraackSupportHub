@@ -57,7 +57,6 @@ export default {
                 reqTicketDescription: "",
                 reqTicketPriority: "",
                 reqTicketCategory: "",
-                reqTicketCreatedBy: "",
             }
 
         }
@@ -66,8 +65,6 @@ export default {
         async submitTicketData() {
             try {
                 console.log(this.ticketData)
-                let ticketcreater = localStorage.getItem("userName")
-                this.ticketData.reqTicketCreatedBy = ticketcreater
                 const response = await axios.post('http://localhost:8081/tickets/create', this.ticketData);
 
                 if (response.status === 200) {

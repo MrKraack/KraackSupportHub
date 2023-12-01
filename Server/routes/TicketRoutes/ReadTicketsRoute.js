@@ -3,26 +3,31 @@ const TicketModel = require('../../models/TicketModel')
 module.exports = async (req, res) => {
     try {
 
+        console.log("readTicketCookies: ")
+        console.log(req.roles)
+        console.log(req.user)
         // Logik for at finde alle todos
         // let tickets = await TicketModel.find();
 
         // res.json(tickets)
-
+        const userName = req.user;
         const userRole = req.roles;
 
-        // Perform role-based authorization
+   
         if (userRole === 1432) {
             // Fetch all tickets for admins
             console.log("admin access")
-            let allTicket = TicketModel.find({TicketModel})
-            return allTicket
-            // ...
-            res.json({ message: 'Admin: All tickets fetched' });
-        } else if (userRole === 'user') {
+            let allTicket = await TicketModel.find({TicketModel})
+            res.json(allTicket)
+   
+        } else if (userRole === 7326) {
             // Fetch only user-specific tickets
             console.log("user access")
+            let userTickets = await TicketModel.find({TicketCreatedBy: userName})
+            console.log("userTickets: ")
+            console.log(userTickets)
+            res.json(userTickets)
             // ...
-            res.json({ message: 'User: Specific tickets fetched' });
         } else {
             // Handle other roles or unexpected scenarios
             res.status(403).json({ error: 'Unauthorized' });

@@ -29,14 +29,19 @@ module.exports = async (req, res ) => {
 
         // Create token
         const token = jwt.sign(
-            { user_id: newUser.userID, reqUserName },
+            {
+                "UserInfo": {
+                    "userName": newUser.userName,
+                    "roles": newUser.userRole
+                }
+            },
             process.env.ACCESS_TOKEN_SECRET,
             {
                 expiresIn: "30s",
             }
         );
         // save user token
-        newUser.token = token;
+        newUser.accessToken = token;
 
         newUser.save();
         res.status(200).json("User has been created");

@@ -16,10 +16,8 @@ module.exports = async (req, res) => {
 
 
     if (await bcrypt.compare(reqUserPassword, userObject.userPassword)) {
-
-      const roles = userObject.userRole
-      console.log("this is user roles: ")
-      console.log(roles)
+      console.log("Logged in user object: ")
+      console.log(userObject)
 
       //create JWT
       const accessToken = jwt.sign(
@@ -27,7 +25,7 @@ module.exports = async (req, res) => {
           "UserInfo":
           {
             "userName": userObject.userName,
-            "roles": roles
+            "roles": userObject.roles
           }
         },
         process.env.ACCESS_TOKEN_SECRET,
@@ -35,7 +33,12 @@ module.exports = async (req, res) => {
       )
       
       const refreshToken = jwt.sign(
-        {"userName": userObject.userName,},
+        {"UserInfo":
+        {
+          "userName": userObject.userName,
+          "roles": userObject.roles
+        }
+      },
         process.env.REFRESH_TOKEN_SECRET,
         {expiresIn: "1d"}
       )
@@ -51,7 +54,7 @@ module.exports = async (req, res) => {
       console.log("Login success");
       // res.cookie('jwt', refreshToken, { httpOnly: false, sameSite: 'None', secure: false, maxAge: 24 * 60 * 60 * 1000 });
 
-      res.cookie('accessToken', accessToken, {
+      res.cookie('jwt', refreshToken, {
         httpOnly: true,
         sameSite: 'None',
         maxAge: 1 * 60 * 60 * 1000, // (1 hour)

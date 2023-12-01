@@ -63,7 +63,7 @@ router.put('/business/:id', updateBusinessRoute)
 router.delete('/business/:id', deleteBusinessesRoute)
 
 //Auth Routes
-router.get('/refresh', refrestTokenRoute)
+router.post('/refresh', refrestTokenRoute)
 
 
 

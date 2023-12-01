@@ -1,4 +1,5 @@
 const TicketModel = require('../../models/TicketModel');
+const jwt = require("jsonwebtoken")
 // const UserModel = require("../../models/UserModel");
 
 
@@ -24,6 +25,8 @@ module.exports = async (req, res) => {
     // //Increment the ID
     ticketCount++;
     let newTicketID = `Ticket${ticketCount}`;
+    
+    let cookie = req.cookies.jwt
 
     try {
      
@@ -38,6 +41,13 @@ module.exports = async (req, res) => {
         const originalDateAndTime = currentDateFormat.split(', ')[0];
         const extractedValue = match[0];
         const result = `${originalDateAndTime}, KL:${extractedValue.replace(/\.\d+$/, '')}`;
+
+        //Get userName from Cookie
+        let decoded = jwt.verify(cookie, process.env.REFRESH_TOKEN_SECRET);
+        let userName = decoded.UserInfo.userName;
+
+        console.log("This is decoded from create Ticket: ")
+        console.log(decoded)
        
 
         //Create newTicket using values from req.query
@@ -50,7 +60,7 @@ module.exports = async (req, res) => {
             TicketAssigned: reqTicketAssigned,
             TicketCreated: result,
             TicketPriority: reqTicketPriority,
-            TicketCreatedBy: reqTicketCreatedBy,
+            TicketCreatedBy: userName,
             TicketCategory: reqTicketCategory,
             TicketSubCategory: reqTicketSubCategory,
             TicketComments: reqTicketComments

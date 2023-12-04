@@ -6,44 +6,47 @@ module.exports = async (req, res) => {
 
     //Get the variables
     let {
-        reqTicketTitel,
-        reqTicketDescription,
-        reqTicketState,
-        reqTicketDueDate,
-        reqTicketAssigned,
-        reqTicketPriority,
-        reqTicketCategory,
-        reqTicketSubCategory,
-        reqTicketComments
-    } = req.body
-    
-    
-    
+        TicketTitel,
+        TicketDescription,
+        TicketState,
+        TicketDueDate,
+        TicketAssigned,
+        TicketPriority,
+        TicketCategory,
+        TicketSubCategory,
+        TicketComments
+    } = req.body.ticketData
+
+
+
     try {
-                
+
         //Update Ticket with new info from updateVariable
         const updateModel = {
-            TicketTitel: reqTicketTitel,
-            TicketDescription: reqTicketDescription,
-            TicketState: reqTicketState,
-            TicketDueDate: reqTicketDueDate,
-            TicketAssigned: reqTicketAssigned,
-            TicketPriority: reqTicketPriority,
-            TicketCategory: reqTicketCategory,
-            TicketSubCategory: reqTicketSubCategory,
-            TicketComments: reqTicketComments
+            TicketTitel: TicketTitel,
+            TicketDescription: TicketDescription,
+            TicketState: TicketState,
+            TicketDueDate: TicketDueDate,
+            TicketAssigned: TicketAssigned,
+            TicketPriority: TicketPriority,
+            TicketCategory: TicketCategory,
+            TicketSubCategory: TicketSubCategory,
+            TicketComments: TicketComments
+
         }
-        
-    
-        
-        
+
+
+
+
         //Save Ticket
-        let result = await ticketModel.updateOne({ TicketID: theTicketID }, updateModel);        console.log(result)   
-        
-        res.status(200).json(`${currentTicketObject.TicketTitel} has been updated`)
-        
+        let result = await ticketModel.updateOne({ TicketID: theTicketID }, updateModel);
+
+        res.status(200)
+
     }
     catch (err) {
+        console.log("error triggered")
+        console.log(err.message)
         res.status(500).json({ error: err.message });
     }
 

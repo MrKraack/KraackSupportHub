@@ -5,13 +5,15 @@ module.exports = async (req, res, next) => {
     console.log("logging VerifyJWT");
 
     const tokenCookie = req.cookies.jwt;
+    
    
 
     if (!tokenCookie) return res.sendStatus(401);
+   
 
     try {
         const accessToken = await refreshTokenLogic(tokenCookie);
-      console.log("afterRefreshRoute: ")
+      
 
         jwt.verify(
             accessToken,
@@ -21,8 +23,7 @@ module.exports = async (req, res, next) => {
                     console.error('Token verification error:', err.message);
                     return res.sendStatus(403); // Not a valid token
                 }
-                console.log("decoded VerifyJWT User: ");
-                console.log(decoded)
+           
                 req.user = decoded.UserInfo.userName;
                 req.roles = decoded.UserInfo.roles;
                 next();

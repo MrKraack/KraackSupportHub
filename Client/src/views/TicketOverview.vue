@@ -54,8 +54,9 @@ export default {
                 const response = await axios.get("http://localhost:8081/tickets", {
                     withCredentials: true,
                 });
-
-                const listData = response.data;
+                console.log("Response: ")
+                console.log(response)
+                const listData = response.data.Tickets;
                 console.log(listData);
                 // Handle your data here
                 this.ticketData = listData;

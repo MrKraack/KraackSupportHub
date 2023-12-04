@@ -18,7 +18,11 @@ module.exports = async (req, res) => {
             // Fetch all tickets for admins
             console.log("admin access")
             let allTicket = await TicketModel.find({TicketModel})
-            res.json(allTicket)
+            let responseData = {
+                Tickets: allTicket,
+                role: userRole
+            }
+            res.json(responseData)
    
         } else if (userRole === 7326) {
             // Fetch only user-specific tickets
@@ -26,7 +30,11 @@ module.exports = async (req, res) => {
             let userTickets = await TicketModel.find({TicketCreatedBy: userName})
             console.log("userTickets: ")
             console.log(userTickets)
-            res.json(userTickets)
+            let responseData = {
+                Tickets: userTickets,
+                role: userRole
+            }
+            res.json(responseData)
             // ...
         } else {
             // Handle other roles or unexpected scenarios

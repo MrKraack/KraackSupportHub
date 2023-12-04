@@ -2,17 +2,38 @@
     <div class="navBar">
       <img src="" alt="logo" class="logoNav" />
       <nav>
-        <router-link to="/dashboard" >Dashboard</router-link>
-        <router-link to="/Tickets">Tickets</router-link>
-        <router-link to="/Business">Business</router-link>
-        <router-link to="/Settings">Settings</router-link>
-        <router-link to="/Help">Help</router-link>
+       
+
+          <router-link to="/dashboard" >Dashboard</router-link>
+          <router-link to="/Tickets">Tickets</router-link>
+        
+
+          <router-link to="/Business">Business</router-link>
+          <router-link to="/Settings">Settings</router-link>
+          <router-link to="/Help">Help</router-link>
+        
       </nav>
     </div>
   </template>
 
 <script>
 export default {
+  data(){
+    return{
+      userRole: "",
+
+    }
+  },
+  methods: {
+    async verifyUser(){
+
+    }
+
+  },
+  mounted(){
+    this.verifyUser();
+
+  }
 
 }
 </script>

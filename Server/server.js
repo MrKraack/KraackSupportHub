@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 
 app.use(cors({
     credentials: true,
-    origin: "http://localhost:8080",
+    origin: ["http://localhost:8080", "http://localhost:8081"],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 

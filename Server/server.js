@@ -17,10 +17,7 @@ app.use((req, res, next) => {
 
 app.use(cors({
     credentials: true,
-    origin: "*",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
+    origin: ["http://localhost:8080", "http://localhost:8081", "https://support-hub-tau.vercel.app", "https://3.75.158.163"],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 

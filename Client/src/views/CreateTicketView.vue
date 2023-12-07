@@ -64,12 +64,10 @@ export default {
     methods: {
         async submitTicketData() {
             try {
-                console.log(this.ticketData)
                 const response = await axios.post('http://localhost:8081/tickets/create', this.ticketData);
 
                 if (response.status === 200) {
                     // Handle success
-                    console.log('Ticket created successfully');
                     router.push({name: "tickets"})
                 } else {
                     // Handle error

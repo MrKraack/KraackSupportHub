@@ -71,9 +71,9 @@
           <h4>{{ ticketDetails.TicketPriority }}</h4>
         </div>
         <select v-else v-model="ticketDetails.TicketPriority" @change="handleTicketChange">
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
           <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
         </select>
       </div>
 
@@ -133,6 +133,7 @@ export default {
       const response = await axios.get(`http://localhost:8081/ticket/${routerTicketId}`, {
         withCredentials: true,
       });
+      
       let convertTicket = response.data.theTicket
       //Assign Ticket Object to Ticket Details
       this.ticketDetails = convertTicket;

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const refreshTokenLogic = require("./refreshTokenRoute");
 
-module.exports = async (req, res, next) => {
+module.exports = async (req, res) => {
     console.log("logging VerifyJWT");
 
     const tokenCookie = req.cookies.jwt;
@@ -21,10 +21,13 @@ module.exports = async (req, res, next) => {
                     console.error('Token verification error:', err.message);
                     return res.sendStatus(403); // Not a valid token
                 }
-           
-                req.user = decoded.UserInfo.userName;
-                req.roles = decoded.UserInfo.roles;
-                next();
+                userInfo = {
+                    user: decoded.UserInfo.userName,
+                    roles: decoded.UserInfo.roles
+
+                }
+                
+                res.json(userInfo)
             }
         );
     } catch (error) {

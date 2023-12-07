@@ -33,9 +33,7 @@ import axios from 'axios';
         },
         methods: {
             async submitRegisterForm(){
-                console.log(this.newUserData)
                 let response = await axios.post("http://localhost:8081/register", this.newUserData)
-                console.log("user created")
                 if(response.status === 200){
 
                     this.$router.push('/login');

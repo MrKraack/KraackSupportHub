@@ -3,10 +3,13 @@
 
         <div class="ticketHeader">
             <h1>All Tickets</h1>
+            <router-link v-if="userRole === 1432" :to="{ name: 'createTicket' }">
+                <button>Create Ticket</button>
+            </router-link>
         </div>
 
         <div v-if="ticketData" class="ticketListContainer">
-            <table class="ticketTable">
+            <table class="ticketTable" cellspacing="0">
                 <thead>
                     <th @click="sortBy('TicketID')">ID</th>
                     <th @click="sortBy('TicketCreatedBy')">Requester</th>
@@ -21,7 +24,7 @@
                         <td>{{ ticket.TicketID }}</td>
                         <td>{{ ticket.TicketCreatedBy }}</td>
                         <td>{{ ticket.TicketTitel }}</td>
-                        <td>{{ ticket.TicketPriority }}</td>
+                        <td :style="{ color: getPriorityColor(ticket.TicketPriority) }">{{ ticket.TicketPriority }}</td>
                         <td>{{ ticket.TicketCategory }}</td>
                         <td>{{ ticket.TicketState }}</td>
                     </tr>
@@ -44,6 +47,7 @@ export default {
             ticketData: null,
             sortKey: null,
             sortOrder: 1, // 1 for ascending, -1 for descending
+            userRole: null
         };
     },
     methods: {
@@ -54,12 +58,17 @@ export default {
                 const response = await axios.get("http://localhost:8081/tickets", {
                     withCredentials: true,
                 });
-                console.log("Response: ")
-                console.log(response)
+
                 const listData = response.data.Tickets;
-                console.log(listData);
-                // Handle your data here
+                // assign tickets to TicketData
                 this.ticketData = listData;
+                console.log(this.ticketData)
+
+                //Get userRole
+                this.userRole = response.data.role
+
+
+
             } catch (error) {
                 console.error("Axios error:", error);
                 // Handle errors
@@ -67,7 +76,6 @@ export default {
 
         },
         goToTicketDetail(ticket) {
-            console.log('Navigating to Ticket Detail with:', ticket);
             this.$router.push({ name: 'ticketDetail', params: { id: ticket.TicketID } });
         },
         sortBy(key) {
@@ -93,6 +101,18 @@ export default {
                 }
             });
         },
+        getPriorityColor(priority) {
+            switch (priority) {
+                case 'High':
+                    return 'red';
+                case 'Medium':
+                    return 'yellow';
+                case 'Low':
+                    return 'green';
+                default:
+                    return 'inherit'; // Use default color if priority is not recognized
+            }
+        }
     },
     mounted() {
         this.FetchData()
@@ -108,9 +128,30 @@ export default {
     flex-direction: column;
     justify-content: start;
 
+    .ticketHeader {
+        display: flex;
+        align-items: center;
 
-    h1 {
-        padding-left: 5%;
+        h1 {
+            color: #fff;
+            /* White text color for better contrast */
+            margin: 0; /* Remove default margin */
+        }
+
+        button {
+            position: right;
+            background-color: #4CAF50;
+            /* Green background */
+            color: #fff;
+            /* White text color */
+            padding: 8px 12px;
+            /* Padding */
+            border: none;
+            /* No border */
+            cursor: pointer;
+            border-radius: 4px;
+            /* Rounded corners */
+        }
     }
 
     .ticketListContainer {
@@ -118,28 +159,47 @@ export default {
         flex-direction: column;
 
         .ticketTable {
+            width: 100%;
             text-align: left;
 
             thead {
-                border-bottom: 1rem solid green;
+                th {
+                    background-color: #333;
+                    color: #fff;
+                    padding: 8px;
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+
+                border-bottom: 1rem solid #333;
             }
 
             tbody {
                 tr {
                     td {
-                        padding: 0px;
+                        padding: 8px;
+
+                        &:nth-child(4) {
+                            font-weight: bold;
+                        }
                     }
                 }
 
                 tr:nth-child(even) {
-                    background-color: red;
+                    background-color: #1f1f1f;
+                }
 
+                tr:hover {
+                    background-color: #2a2a2a;
                 }
             }
         }
     }
-
-
 }
 </style>
+
+
+
+
+
 

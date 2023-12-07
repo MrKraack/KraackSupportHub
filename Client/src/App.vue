@@ -1,11 +1,12 @@
 <template>
   <UpperBarComp></UpperBarComp>
-  <NavBarComp></NavBarComp>
+  <SideBarComp v-if="shouldRenderSideBar"></SideBarComp>
+   
   <router-view/>
 </template>
 <script>
-import NavBarComp from "./components/SideBarComp.vue"
 import UpperBarComp from "./components/UpperBarComp.vue"
+import SideBarComp from "./components/SideBarComp.vue";
 
 export default{
   data() {
@@ -14,9 +15,19 @@ export default{
     }
   },
   components: {
-    NavBarComp,
-    UpperBarComp
-  }
+    UpperBarComp,
+    SideBarComp
+  },
+  computed: {
+    // Compute a boolean value based on the current route
+    shouldRenderSideBar() {
+      // Access the current route from the Vue Router
+      const currentRoute = this.$route.path;
+
+      // Conditionally render SideBarComp only if the route is not "/login"
+      return currentRoute !== "/login";
+    },
+  },
 }
 </script>
 

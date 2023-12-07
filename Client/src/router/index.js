@@ -5,6 +5,12 @@ import createTicketView from "../views/CreateTicketView.vue"
 import TicketDetailView from "../views/TicketDetailView.vue"
 import LoginView from "../views/LoginView.vue"
 import registerView from "../views/RegisterView.vue"
+import businessView from "../views/BusinessView.vue"
+import BusinessDetailView from "../views/BusinessDetailView.vue"
+import BusinessCreateView from "../views/BusinessCreateView.vue"
+
+import axios from "axios"
+
 
 const routes = [
   {
@@ -52,7 +58,30 @@ const routes = [
     meta: {
       requiresAuth: true // Add meta field to indicate protected route
     }
-  }
+  },
+  {
+    path: '/business',
+    name: 'business',
+    component: businessView,
+    props: true,
+    
+  },
+  {
+    path: '/business/:id',
+    name: 'businessDetail',
+    component: BusinessDetailView,
+    props: true,
+    meta: {
+      requiresAuth: true // Add meta field to indicate protected route
+    }
+  },
+  {
+    path: '/business/Create',
+    name: 'businessCreate',
+    component: BusinessCreateView,
+    props: true,
+    
+  },
 
 ]
 
@@ -63,20 +92,26 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.meta.requiresAuth) {
-//     const token = localStorage.getItem('userToken');
-//     if (token) {
-//       // User is authenticated, proceed to the route
-//       next();
-//     } else {
-//       // User is not authenticated, redirect to login
-//       next('/login');
-//     }
-//   } else {
-//     // Non-protected route, allow access
-//     next();
-//   }
-// });
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.requiresAuth) {
+
+    let response = await axios.get("http://localhost:8081/cookieVerify")
+    console.log(response.data)
+
+
+   
+
+    if (response.data) {
+      // User is authenticated, proceed to the route
+      next();
+    } else {
+      // User is not authenticated, redirect to login
+      next("/login");
+    }
+  } else {
+    // Non-protected route, allow access
+    next();
+  }
+});
 
 export default router

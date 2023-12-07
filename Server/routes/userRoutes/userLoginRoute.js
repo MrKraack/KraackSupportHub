@@ -10,14 +10,13 @@ module.exports = async (req, res) => {
     const userObject = await UserModel.findOne({ userName: reqUserName });
 
     if (!userObject) {
-      console.log("User not found");
+      
       return res.status(404).json({ error: 'User not found' });
     }
 
 
     if (await bcrypt.compare(reqUserPassword, userObject.userPassword)) {
-      console.log("Logged in user object: ")
-      console.log(userObject)
+     
 
       //create JWT
       const accessToken = jwt.sign(
@@ -51,8 +50,6 @@ module.exports = async (req, res) => {
 
       await userObject.save();
 
-      console.log("Login success");
-      // res.cookie('jwt', refreshToken, { httpOnly: false, sameSite: 'None', secure: false, maxAge: 24 * 60 * 60 * 1000 });
 
       res.cookie('jwt', refreshToken, {
         httpOnly: true,
@@ -64,7 +61,6 @@ module.exports = async (req, res) => {
     } 
     
     else {
-      console.log("Invalid credentials");
       return res.status(400).json({ error: 'Invalid credentials' });
     }
 

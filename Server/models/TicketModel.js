@@ -19,7 +19,8 @@ const ticketSchema = new mongoose.Schema({
     TicketCategory: { type: String, default: null },
     TicketSubCategory: { type: String, default: null },
     TicketComments: [commentSchema],
-},{collection: "Tickets"})
+},
+{collection: "Tickets"})
 
 const ticketModel = mongoose.model('ticketModel', ticketSchema)
 

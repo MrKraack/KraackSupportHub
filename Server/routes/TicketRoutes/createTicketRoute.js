@@ -45,9 +45,6 @@ module.exports = async (req, res) => {
         let decoded = jwt.verify(cookie, process.env.REFRESH_TOKEN_SECRET);
         let userName = decoded.UserInfo.userName;
 
-        console.log("This is decoded from create Ticket: ")
-        console.log(decoded)
-       
 
         //Create newTicket using values from req.query
         let newTicket = new TicketModel({

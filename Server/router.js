@@ -5,8 +5,6 @@ const express = require("express")
 //User
 const userRegisterRoute = require('./routes/userRoutes/createUserRoute')
 const userLoginRoute = require('./routes/userRoutes/userLoginRoute')
-// const userIsAuth = require('./routes/user/isAuth') //to authenticate, that user is logged in, when trying to go to page
-// const updateUser = require('./routes/user/updateUser')
 const readUserIDRoute = require('./routes/userRoutes/readUserByIDRoute')
 const readUserRoute = require('./routes/userRoutes/readUsersRoute')
 const deleteUserRoute = require("./routes/userRoutes/deleteUserRoute")
@@ -27,9 +25,11 @@ const readBusinessByIDRoute = require('./routes/businessRoutes/readBusinessByIDR
 const deleteBusinessesRoute = require('./routes/businessRoutes/deleteBusinessRoute')
 const updateBusinessRoute = require('./routes/businessRoutes/updateBusinessRoute')
 
-//Auth
+//Auth / Middleware
 const verifyJWTRoute = require("./routes/middleware/verifyJWT")
 const refrestTokenRoute = require("./routes/middleware/refreshTokenRoute")
+const cookieVerify = require("./routes/middleware/cookieVerifyRoute")
+const cookieInfoRoute = require("./routes/middleware/cookieInfoRoute")
 
 // Routes defineres her
 const router = express.Router()
@@ -47,7 +47,6 @@ router.delete('/user/:id', deleteUserRoute)
 
 
 //Ticket routes
-// router.post('/todos/get', tokenAuth, readTodosRoute)
 router.post('/tickets/create', createTicketRoute)
 router.get('/tickets', verifyJWTRoute, readTicketsRoute) 
 router.get('/ticket/:id', verifyJWTRoute, readTicketByIDRoute)
@@ -63,7 +62,9 @@ router.put('/business/:id', updateBusinessRoute)
 router.delete('/business/:id', deleteBusinessesRoute)
 
 //Auth Routes
-router.post('/refresh', refrestTokenRoute)
+router.get('/refresh', refrestTokenRoute)
+router.get("/cookieVerify", cookieVerify)
+router.get("/cookieInfo", cookieInfoRoute)
 
 
 

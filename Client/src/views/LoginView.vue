@@ -34,20 +34,33 @@ export default {
     methods: {
         async loginSubmit() {
             try {
-                console.log('Attempting login with user info:', this.userInfo);
+                await axios.post("http://localhost:8081/login", this.userInfo);
 
-                let response = await axios.post("http://localhost:8081/login", this.userInfo);
-                console.log('Server Response:', response);
+                // Assuming successful login, redirect to Tickets
                 
-                
-
-               
-                //     // Redirect to Tickets
+                    
                     this.$router.push('/tickets');
                 
             } catch (error) {
                 console.error('Error during login:', error);
-                // Handle login error as needed
+
+                if (error.response && error.response.status) {
+                    const statusCode = error.response.status;
+
+                    if (statusCode === 400) {
+                        // Bad Request, handle accordingly (e.g., invalid input)
+                        alert('Invalid input. Please check your credentials.');
+                    } else if (statusCode === 401) {
+                        // Unauthorized, incorrect credentials
+                        alert('Invalid username or password');
+                    } else {
+                        // Handle other status codes as needed
+                        alert('An error occurred during login. Please try again.');
+                    }
+                } else {
+                    // Handle other types of errors
+                    alert('An unexpected error occurred during login. Please try again.');
+                }
             }
         }
     }
@@ -59,7 +72,6 @@ export default {
 
 <style lang="scss" scoped>
 .loginContainer {
-    margin-left: 10%;
 
     form {
         display: flex;

@@ -15,7 +15,7 @@ module.exports = async (req, res ) => {
 
     try {
 
-       console.log(userCount)
+       
         //Encrypt password using Bcrypt hashing
         let encryptedPassword = await bcrypt.hash(reqUserPassword, 10)
 

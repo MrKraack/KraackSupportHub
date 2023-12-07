@@ -20,7 +20,6 @@ module.exports = async (req, res) => {
 
         // Check if user wants to update the password
         if (reqBusinessPassword) {
-            console.log("password detected")
             //Encrypt the password
 
             let encryptedPassword = await bcrypt.hash(reqBusinessPassword, 10)

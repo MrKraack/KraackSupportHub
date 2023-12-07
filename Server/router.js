@@ -1,6 +1,5 @@
 const express = require("express")
 
-// Routes importeres her
 
 //User
 const userRegisterRoute = require('./routes/userRoutes/createUserRoute')
@@ -11,7 +10,8 @@ const deleteUserRoute = require("./routes/userRoutes/deleteUserRoute")
 
 
 //Tickets
-const createTicketRoute = require('./routes/ticketRoutes/createTicketRoute')
+// const createTicketRoute = require('./routes/ticketRoutes/createTicketRoute')
+const createTicketRoute = require('../Server/routes/ticketRoutes/createTicketRoute')
 const readTicketsRoute = require('./routes/ticketRoutes/readTicketsRoute')
 const readTicketByIDRoute = require('./routes/ticketRoutes/readTicketByIDRoute')
 const deleteTicketsRoute = require('./routes/ticketRoutes/deleteTicketByIDRoute')
@@ -30,17 +30,16 @@ const verifyJWTRoute = require("./routes/middleware/verifyJWT")
 const refrestTokenRoute = require("./routes/middleware/refreshTokenRoute")
 const cookieVerify = require("./routes/middleware/cookieVerifyRoute")
 const cookieInfoRoute = require("./routes/middleware/cookieInfoRoute")
+// const cookieInfoRoute = require("../Server/routes/middleware/cookieInfoRoute")
 
 // Routes defineres her
 const router = express.Router()
 
 
-// const tokenAuth = require('./middleware/tokenAuth')
 
 //User routes
 router.post('/register', userRegisterRoute)
 router.post('/login', userLoginRoute)
-// router.put('/updateUser/:id', updateUser)
 router.get('/user/:id', readUserIDRoute)
 router.get('/users', readUserRoute)
 router.delete('/user/:id', deleteUserRoute)

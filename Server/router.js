@@ -11,9 +11,9 @@ const deleteUserRoute = require("./routes/userRoutes/deleteUserRoute")
 
 //Tickets
 const createTicketRoute = require('./routes/TicketRoutes/createTicketRoute')
-const readTicketsRoute = require('./routes/TicketRoutes/readTicketsRoute')
-const readTicketByIDRoute = require('./routes/TicketRoutes/readTicketByIDRoute')
-const deleteTicketsRoute = require('./routes/TicketRoutes/deleteTicketByIDRoute')
+const readTicketsRoute = require('./routes/TicketRoutes/ReadTicketsRoute')
+const readTicketByIDRoute = require('./routes/TicketRoutes/ReadTicketByIDRoute')
+const deleteTicketsRoute = require('./routes/TicketRoutes/DeleteTicketByIDRoute')
 const updateTicketRoute = require('./routes/TicketRoutes/updateTicketRoute')
 const readTicketsByUsernameRoute = require("./routes/TicketRoutes/readTicketsByNameRoute")
 

@@ -34,7 +34,7 @@ export default {
     methods: {
         async loginSubmit() {
             try {
-                await axios.post("http://localhost:8081/login", this.userInfo);
+                await axios.post("http://3.75.158.163/login", this.userInfo);
 
                 // Assuming successful login, redirect to Tickets
                 

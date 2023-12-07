@@ -64,6 +64,9 @@ const routes = [
     name: 'business',
     component: businessView,
     props: true,
+    meta: {
+      requiresAuth: true // Add meta field to indicate protected route
+    }
     
   },
   {

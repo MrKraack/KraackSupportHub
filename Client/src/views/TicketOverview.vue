@@ -110,7 +110,7 @@ export default {
                 case 'Low':
                     return 'green';
                 default:
-                    return 'inherit'; // Use default color if priority is not recognized
+                    return ''; // default if nothing
             }
         }
     },
@@ -131,26 +131,30 @@ export default {
     .ticketHeader {
         display: flex;
         align-items: center;
+        justify-content: space-between; /* Align h1 to the center and button to the right */
+        width: 100%; /* Ensure the header takes up the full width */
 
         h1 {
-            color: #fff;
-            /* White text color for better contrast */
-            margin: 0; /* Remove default margin */
+            color: #ff5733; 
+            font-size: 24px;
+            
+            text-align: center; 
+            flex-grow: 1; /* Allow the h1 to take up available space */
         }
 
         button {
-            position: right;
             background-color: #4CAF50;
-            /* Green background */
             color: #fff;
-            /* White text color */
             padding: 8px 12px;
-            /* Padding */
+            margin-right: 50px; /* Add margin to the left of the button */
             border: none;
-            /* No border */
             cursor: pointer;
             border-radius: 4px;
-            /* Rounded corners */
+            font-size: 14px;
+
+            &:hover {
+                background-color: #45a049;
+            }
         }
     }
 
@@ -197,9 +201,3 @@ export default {
     }
 }
 </style>
-
-
-
-
-
-

@@ -53,7 +53,8 @@ module.exports = async (req, res) => {
 
       res.cookie('jwt', refreshToken, {
         httpOnly: true,
-        sameSite: 'None',
+        sameSite: 'Lax',
+        Secure: true,
         maxAge: 1 * 60 * 60 * 1000, // (1 hour)
       });
       res.json({accessToken})

@@ -72,12 +72,46 @@ export default {
 
 <style lang="scss" scoped>
 .loginContainer {
+    background-color: #242424;
+    height: 100vh; /* Set the height to 100% of the viewport height */
+    display: flex;
+    justify-content: center;
+    margin: 15% 0%;
 
     form {
+        width: 30%;
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: white; /* Set label text color to white */
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fff; /* Set input background color to white */
+            color: #333; /* Set input text color */
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
     }
 }
 </style>

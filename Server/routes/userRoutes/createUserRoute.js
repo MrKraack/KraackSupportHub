@@ -2,20 +2,26 @@ const UserModel = require("../../models/UserModel")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 
-module.exports = async (req, res ) => {
+module.exports = async (req, res) => {
     //Get all variables from body
     let { reqUserName, reqUserPassword, reqUserEmail } = req.body
 
     //count documents in database
-    let userCount = await UserModel.countDocuments({type: UserModel}).exec();
-    
+    let userCount = await UserModel.countDocuments({ type: UserModel }).exec();
+
     // //Increment the ID
     userCount++;
     let newUserID = `user${userCount}`;
 
-    try {
 
-       
+    try {
+        //Check if username already exists 
+        const existingUser = await UserModel.findOne({ userName: reqUserName });
+
+        if (existingUser) {
+            return res.status(400).json({ error: "Username already exists" });
+        }
+
         //Encrypt password using Bcrypt hashing
         let encryptedPassword = await bcrypt.hash(reqUserPassword, 10)
 

@@ -108,6 +108,7 @@ export default {
             textarea {
                 width: 100%;
                 resize: none;
+                border-radius: 50px;
             }
 
             input[type=text] {
@@ -115,6 +116,8 @@ export default {
                 margin: 8px 0;
                 box-sizing: border-box;
                 width: 100%;
+                border-radius: 50px;
+
             }
 
             select {
@@ -126,7 +129,7 @@ export default {
                 width: 100%;
                 background-color: #04AA6D;
                 border: none;
-                border-radius: 14%;
+                border-radius: 50px;
                 color: white;
                 padding: 16px 32px;
                 text-decoration: none;

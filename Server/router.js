@@ -10,12 +10,12 @@ const deleteUserRoute = require("./routes/userRoutes/deleteUserRoute")
 
 
 //Tickets
-const createTicketRoute = require('./routes/ticketRoutes/createTicketRoute.js')
-const readTicketsRoute = require('./routes/ticketRoutes/readTicketsRoute')
-const readTicketByIDRoute = require('./routes/ticketRoutes/readTicketByIDRoute')
-const deleteTicketsRoute = require('./routes/ticketRoutes/deleteTicketByIDRoute')
-const updateTicketRoute = require('./routes/ticketRoutes/updateTicketRoute')
-const readTicketsByUsernameRoute = require("./routes/ticketRoutes/readTicketsByNameRoute")
+const createTicketRoute = require('./routes/TicketRoutes/createTicketRoute')
+const readTicketsRoute = require('./routes/TicketRoutes/readTicketsRoute')
+const readTicketByIDRoute = require('./routes/TicketRoutes/readTicketByIDRoute')
+const deleteTicketsRoute = require('./routes/TicketRoutes/deleteTicketByIDRoute')
+const updateTicketRoute = require('./routes/TicketRoutes/updateTicketRoute')
+const readTicketsByUsernameRoute = require("./routes/TicketRoutes/readTicketsByNameRoute")
 
 // Businesses
 const createBusinessRoute = require('./routes/businessRoutes/createBusinessRoute')

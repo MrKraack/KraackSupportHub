@@ -17,12 +17,10 @@
             <div class="businessDetailPassword">
                 <p><strong>Password: </strong>{{ businessDetails.BusinessPassword }}</p>
             </div>
-
-
         </div>
     </div>
 </template>
-    
+
 <script>
 import axios from 'axios';
 
@@ -31,7 +29,7 @@ export default {
         return {
             businessDetails: null,
             businessCommentInput: "",
-        }
+        };
     },
     props: {
         business: Object,
@@ -44,19 +42,18 @@ export default {
             });
             let convertBusiness = response.data;
             this.businessDetails = convertBusiness;
-            console.log(this.businessDetails)
+            console.log(this.businessDetails);
         },
         handleBusinessChange() {
             this.updateBusiness();
         },
-
     },
     created() {
         this.fetchData();
     }
 };
 </script>
-    
+
 <style lang="scss" scoped>
 .businessContainer {
     margin-left: 20%;
@@ -79,9 +76,37 @@ export default {
             }
         }
 
-        
-    }
+        .businessDetailName,
+        .businessDetailOwner,
+        .businessDetailWebsite,
+        .businessDetailUsername,
+        .businessDetailPassword {
+            margin-bottom: 20px;
 
-   
+            p {
+                color: #FFF;
+                /* White text color */
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            strong {
+                color: #ff5733;
+                /* Orange text color */
+                font-weight: bold;
+                font-size: 18px;
+            }
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            background-color: #FFF;
+            /* White background */
+            color: #242424;
+            /* Dark text color */
+        }
+    }
 }
 </style>

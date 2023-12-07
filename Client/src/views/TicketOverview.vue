@@ -3,7 +3,7 @@
 
         <div class="ticketHeader">
             <h1>All Tickets</h1>
-            <router-link v-if="userRole === 1432" :to="{ name: 'createTicket' }">
+            <router-link :to="{ name: 'createTicket' }">
                 <button>Create Ticket</button>
             </router-link>
         </div>
@@ -136,7 +136,7 @@ export default {
 
         h1 {
             color: #ff5733; 
-            font-size: 24px;
+            font-size: 3em;
             
             text-align: center; 
             flex-grow: 1; /* Allow the h1 to take up available space */

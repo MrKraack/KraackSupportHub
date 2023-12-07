@@ -4,10 +4,8 @@
         <div class="businessHeader">
             <h1>All Business</h1>
             <router-link to="/business/create">
-
                 <button>Create Business</button>
             </router-link>
-           
         </div>
 
         <div v-if="businessList" class="businessListContainer">
@@ -29,14 +27,10 @@
                         <td>{{ business.BusinessWebsite }}</td>
                         <td>{{ business.BusinessUsername }}</td>
                         <td>{{ business.BusinessPassword }}</td>
-                   
                     </tr>
-
                 </tbody>
             </table>
         </div>
-
-
     </div>
 </template>
 
@@ -102,7 +96,6 @@ export default {
     mounted() {
         this.FetchData()
     }
-
 }
 </script>
 
@@ -113,9 +106,33 @@ export default {
     flex-direction: column;
     justify-content: start;
 
-    h1 {
-        padding-left: 5%;
-        color: #fff; /* White text color for better contrast */
+    .businessHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        h1 {
+            color: #ff5733;
+            font-size: 3em;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 8px 12px;
+            margin-right: 50px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+
+            &:hover {
+                background-color: #45a049;
+            }
+        }
     }
 
     .businessListContainer {
@@ -129,14 +146,14 @@ export default {
 
             thead {
                 th {
-                    background-color: #333; /* Dark gray background */
-                    color: #fff; /* White text color */
-                    padding: 8px; /* Reduced padding */
-                    font-size: 14px; /* Reduced font size */
-                    font-weight: bold; /* Bold font */
+                    background-color: #333;
+                    color: #fff;
+                    padding: 8px;
+                    font-size: 14px;
+                    font-weight: bold;
                 }
 
-                border-bottom: 1rem solid #333; /* Dark gray border */
+                border-bottom: 1rem solid #333;
             }
 
             tbody {
@@ -147,25 +164,15 @@ export default {
                 }
 
                 tr:nth-child(even) {
-                    background-color: #1f1f1f; /* Darker gray background for even rows */
+                    background-color: #1f1f1f;
                 }
 
                 tr:hover {
-                    background-color: #2a2a2a; /* Darker background on hover */
+                    background-color: #2a2a2a;
                 }
             }
-        }
-
-        button {
-            background-color: #4CAF50; /* Green background */
-            color: #fff; /* White text color */
-            padding: 8px 12px; /* Padding */
-            border: none; /* No border */
-            cursor: pointer;
-            border-radius: 4px; /* Rounded corners */
         }
     }
 }
 </style>
-
 

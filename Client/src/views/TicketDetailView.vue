@@ -7,7 +7,7 @@
       </div>
       <div class="ticketDetailHeader">
         <h1>{{ ticketDetails.TicketTitel }}</h1>
-        <p>{{ ticketDetails.TicketCreated }}</p>
+        <p>Created - {{ ticketDetails.TicketCreated }}</p>
       </div>
       <div class="ticketDetailDescription">
         <p>{{ ticketDetails.TicketDescription }}</p>
@@ -39,9 +39,12 @@
 
     <div v-if="ticketDetails" class="detailSideBar">
       <div class="BackTicket">
-        <router-link to="/tickets">X</router-link>
-
+        <router-link to="/tickets">
+          <div class="back-icon">↩</div>
+          Back to Tickets
+        </router-link>
       </div>
+
       <div class="ticketDetailState">
         <h3>Ticket State</h3>
         <div v-if="!isUserRoleAdmin">
@@ -133,7 +136,7 @@ export default {
       const response = await axios.get(`http://localhost:8081/ticket/${routerTicketId}`, {
         withCredentials: true,
       });
-      
+
       let convertTicket = response.data.theTicket
       //Assign Ticket Object to Ticket Details
       this.ticketDetails = convertTicket;
@@ -157,6 +160,7 @@ export default {
         console.error('Error updating ticket:', error.message);
       }
     },
+
 
     async addCommentToTicket() {
       try {
@@ -191,7 +195,7 @@ export default {
 
         // Update the ticket on MongoDB
         await axios.put(`http://localhost:8081/tickets/${this.ticketDetails.TicketID}`, {
-          reqTicketComments: this.ticketDetails.TicketComments
+          ticketData: this.ticketDetails
 
         });
 
@@ -225,10 +229,28 @@ export default {
     .ticketDetailHeader {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      /* Center text horizontally */
+
+      h1 {
+        color: #ff5733;
+        /* Orange text color */
+        font-size: 28px;
+        margin: 10px 0;
+      }
 
       p {
-        margin: 0px;
+        margin: 0;
+        color: #DDD;
+        text-align: left;
+      }
+    }
+
+    .ticketDetailDescription {
+      margin: 20px 0;
+
+      p {
+        color: #FFF;
+        /* White text color for better contrast */
       }
     }
 
@@ -236,45 +258,141 @@ export default {
       width: 80%;
 
       h2 {
-        margin: 5%;
+        margin: 20px 0;
+        font-size: 24px;
+        color: #ff5733;
+        /* Orange text color */
       }
 
       .addCommentSection {
-
         form {
           display: flex;
           flex-direction: column;
 
           textarea {
             resize: none;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #242424;
+            /* Dark text color */
+            background-color: #FFF;
+            /* White background */
           }
 
+          input[type="submit"] {
+            background-color: #ff5733;
+            /* Orange button background */
+            color: #FFF;
+            /* White text color */
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+
+            &:hover {
+              background-color: #e55f2a;
+              /* Darker orange on hover */
+            }
+          }
         }
-
-
       }
 
       ul {
         display: flex;
-        justify-content: start;
-        padding: 0px;
+        flex-direction: column;
+        padding: 0;
 
         li {
           list-style-type: none;
+          margin-bottom: 20px;
+
+          .commentHeader {
+            margin-bottom: 5px;
+
+            span {
+              font-weight: bold;
+              color: #AAA;
+              /* Light gray text color */
+            }
+          }
+
+          .commentBody {
+            color: #FFF;
+            /* White text color */
+          }
         }
       }
     }
-
-
-
   }
 
   .detailSideBar {
     height: 100vh;
-    width: 30%;
+    width: 50%;
+    padding: 20px;
+    display: flex;
+  flex-direction: column;
 
+  align-items: center;
 
+    .BackTicket {
+      margin-bottom: 20px;
+
+      a {
+        text-decoration: none;
+        color: #ff5733;
+        /* Orange text color */
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        text-align: center;
+
+        .back-icon {
+          margin-right: 10px;
+          font-size: 24px;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .ticketDetailState,
+    .ticketDetailAssigned,
+    .ticketDetailPriority,
+    .ticketDetailCategory {
+      margin-bottom: 20px;
+
+      h3 {
+        margin-bottom: 10px;
+        color: #ff5733;
+        /* Orange text color */
+        font-size: 18px;
+      }
+
+      h4 {
+        color: #FFF;
+        /* White text color */
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      select {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        background-color: #FFF;
+        /* White background */
+        color: #242424;
+        /* Dark text color */
+      }
+    }
   }
 }
 </style>
+
   

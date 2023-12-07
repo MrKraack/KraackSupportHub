@@ -29,7 +29,6 @@ const verifyJWTRoute = require("./routes/middleware/verifyJWT")
 const refrestTokenRoute = require("./routes/middleware/refreshTokenRoute")
 const cookieVerify = require("./routes/middleware/cookieVerifyRoute")
 const cookieInfoRoute = require("./routes/middleware/cookieInfoRoute")
-// const cookieInfoRoute = require("../Server/routes/middleware/cookieInfoRoute")
 
 // Routes defineres her
 const router = express.Router()

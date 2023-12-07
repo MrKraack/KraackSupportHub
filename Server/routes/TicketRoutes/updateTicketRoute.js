@@ -3,6 +3,7 @@ module.exports = async (req, res) => {
 
     //Get id from params
     let theTicketID = req.params.id
+    console.log(req.body)
 
     //Get the variables
     let {

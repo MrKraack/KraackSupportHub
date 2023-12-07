@@ -1,44 +1,44 @@
 <template>
-    <div class="upperBar">
-        <router-link to="/register"><img src="" alt="register"></router-link>
-        <router-link to="/login"><img src="" alt="login"></router-link>
-        <a @click="logoutFunction">Logout</a>
-        
-
-    </div>
+  <div class="upperBar">
+      <router-link v-if="userRole === 1432" to="/register">Register</router-link>
+      <router-link to="/login">Login</router-link>
+      <a @click="logoutFunction">Logout</a>
+  </div>
 </template>
 
 <script>
-    export default {
-      data(){
-        return{
-
-        }
+export default {
+  data() {
+      return {
+          userRole: 1432, // Replace with the actual user role from your data
+      };
+  },
+  methods: {
+      logoutFunction() {
+          // Delete cookies or perform logout logic
+          this.$router.push('/login');  // Adjust the route as needed
       },
-      methods: {
-        logoutFunction() {
-      // Clear user-related information from localStorage
-
-
-      // Optionally, perform additional logout-related tasks
-
-      // Redirect the user to the login page or another desired page
-      this.$router.push('/login');  // Adjust the route as needed
-    }
-  }
-        
-    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.upperBar{
-    display: flex;
+.upperBar {
+  display: flex;
   background-color: #121212;
   height: 5vh;
-  justify-content:end;
-  a{
-    margin: 0px 25px  ;
+  justify-content: end;
+  align-items: center;
+
+  a {
+      margin: 0px 25px;
+      color: #fff; // White text color
+      text-decoration: none;
+      font-size: 16px;
+
+      &:hover {
+          text-decoration: underline;
+      }
   }
 }
-
 </style>

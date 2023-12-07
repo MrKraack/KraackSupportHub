@@ -34,7 +34,7 @@ export default {
     methods: {
         async loginSubmit() {
             try {
-                await axios.post("https://3.75.158.163/login", this.userInfo);
+                await axios.post("http://localhost:8081/login", this.userInfo);
 
                 // Assuming successful login, redirect to Tickets
                 
@@ -76,7 +76,7 @@ export default {
     height: 100vh; /* Set the height to 100% of the viewport height */
     display: flex;
     justify-content: center;
-    margin: 15% 0%;
+    margin: 5% 0%;
 
     form {
         width: 30%;

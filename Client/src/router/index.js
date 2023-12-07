@@ -65,7 +65,8 @@ const routes = [
     component: businessView,
     props: true,
     meta: {
-      requiresAuth: true // Add meta field to indicate protected route
+      requiresAuth: true,
+      requiresAdmin: true 
     }
     
   },
@@ -101,15 +102,31 @@ router.beforeEach(async (to, from, next) => {
     let response = await axios.get("http://localhost:8081/cookieVerify")
     console.log(response.data)
 
-
-   
-
     if (response.data) {
       // User is authenticated, proceed to the route
       next();
     } else {
       // User is not authenticated, redirect to login
       next("/login");
+    }
+  } else {
+    // Non-protected route, allow access
+    next();
+  }
+});
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.requiresAdmin) {
+
+    let response = await axios.get("http://localhost:8081/cookieinfo")
+    console.log(response.data)
+
+    if (response.data.roles === 1432) {
+      // User is authenticated, proceed to the route
+      next();
+    } else {
+      // User is not authenticated, redirect to login
+      alert("You're not authorized to visit this section")
+      next("/tickets");
     }
   } else {
     // Non-protected route, allow access

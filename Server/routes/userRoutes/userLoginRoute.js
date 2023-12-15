@@ -42,18 +42,14 @@ module.exports = async (req, res) => {
         {expiresIn: "1d"}
       )
 
-
-
-
       userObject.accessToken = accessToken;
       userObject.refreshToken = refreshToken;
-
       await userObject.save();
 
 
       res.cookie('jwt', refreshToken, {
         httpOnly: true,
-        sameSite: 'None',
+        sameSite: 'Strict',
         maxAge: 1 * 60 * 60 * 1000, // (1 hour)
       });
       res.json({accessToken})

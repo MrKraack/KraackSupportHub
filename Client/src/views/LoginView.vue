@@ -5,7 +5,7 @@
             <input v-model="userInfo.reqUserName" id="loginUsername">
 
             <label for="loginPassword">Password</label>
-            <input v-model="userInfo.reqUserPassword" id="loginPassword">
+            <input type="password" v-model="userInfo.reqUserPassword" id="loginPassword">
 
             <button type="submit">Login</button>
 

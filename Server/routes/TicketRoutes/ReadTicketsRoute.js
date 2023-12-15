@@ -30,9 +30,9 @@ module.exports = async (req, res) => {
                 role: userRole
             }
             res.json(responseData)
-            // ...
+          
         } else {
-            // Handle other roles or unexpected scenarios
+            
             res.status(403).json({ error: 'Unauthorized' });
         }
     }

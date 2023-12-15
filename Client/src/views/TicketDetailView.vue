@@ -133,7 +133,7 @@ export default {
       let routerTicketId = this.$route.params.id;
 
       //Fetch ticket from Database using ID
-      const response = await axios.get(`http://localhost:8081/ticket/${routerTicketId}`, {
+      const response = await axios.get(`http://localhost:8081/tickets/${routerTicketId}`, {
         withCredentials: true,
       });
 

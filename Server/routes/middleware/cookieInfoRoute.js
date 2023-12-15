@@ -2,17 +2,16 @@ const jwt = require("jsonwebtoken");
 const refreshTokenLogic = require("./refreshTokenRoute");
 
 module.exports = async (req, res) => {
-    console.log("logging VerifyJWT");
-
+    //Get Cookie
     const tokenCookie = req.cookies.jwt;
-    
+
+    //Send error if cookie isn't found
     if (!tokenCookie) return res.sendStatus(401);
-   
 
     try {
+        //Make new accessToken 
         const accessToken = await refreshTokenLogic(tokenCookie);
       
-
         jwt.verify(
             accessToken,
             process.env.ACCESS_TOKEN_SECRET,
@@ -25,8 +24,7 @@ module.exports = async (req, res) => {
                     user: decoded.UserInfo.userName,
                     roles: decoded.UserInfo.roles
 
-                }
-                
+                }                
                 res.json(userInfo)
             }
         );

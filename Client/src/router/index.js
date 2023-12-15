@@ -18,7 +18,7 @@ const routes = [
     name: 'dashboard',
     component: DashboardView,
     meta: {
-      requiresAuth: true // Add meta field to indicate protected route
+      requiresAuth: true 
     }
   },
   {
@@ -39,7 +39,7 @@ const routes = [
     name: 'tickets',
     component: TicketOverview,
     meta: {
-      requiresAuth: true // Add meta field to indicate protected route
+      requiresAuth: true 
     }
   },
   {
@@ -47,7 +47,7 @@ const routes = [
     name: 'createTicket',
     component: createTicketView,
     meta: {
-      requiresAuth: true // Add meta field to indicate protected route
+      requiresAuth: true
     }
   },
   {
@@ -56,7 +56,7 @@ const routes = [
     component: TicketDetailView,
     props: true,
     meta: {
-      requiresAuth: true // Add meta field to indicate protected route
+      requiresAuth: true 
     }
   },
   {
@@ -76,7 +76,7 @@ const routes = [
     component: BusinessDetailView,
     props: true,
     meta: {
-      requiresAuth: true // Add meta field to indicate protected route
+      requiresAuth: true 
     }
   },
   {
@@ -98,9 +98,8 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   if (to.meta.requiresAuth) {
-
+    //Check if current user is Authenticated
     let response = await axios.get("http://localhost:8081/cookieVerify")
-    console.log(response.data)
 
     if (response.data) {
       // User is authenticated, proceed to the route
@@ -116,9 +115,8 @@ router.beforeEach(async (to, from, next) => {
 });
 router.beforeEach(async (to, from, next) => {
   if (to.meta.requiresAdmin) {
-
+      //get current user role
     let response = await axios.get("http://localhost:8081/cookieinfo")
-    console.log(response.data)
 
     if (response.data.roles === 1432) {
       // User is authenticated, proceed to the route

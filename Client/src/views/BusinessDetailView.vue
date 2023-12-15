@@ -42,7 +42,6 @@ export default {
             });
             let convertBusiness = response.data;
             this.businessDetails = convertBusiness;
-            console.log(this.businessDetails);
         },
         handleBusinessChange() {
             this.updateBusiness();

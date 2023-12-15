@@ -27,8 +27,7 @@ export default {
     async verifyUser() {
       try {
         const response = await axios.get("http://localhost:8081/cookieInfo");
-        console.log("sideBar Response: ")
-        console.log(response.data)
+        
         this.userRole = response.data.roles
 
       }

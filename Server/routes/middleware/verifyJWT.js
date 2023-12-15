@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const refreshTokenLogic = require("./refreshTokenRoute");
 
 module.exports = async (req, res, next) => {
-    console.log("logging VerifyJWT");
 
     const tokenCookie = req.cookies.jwt;
     

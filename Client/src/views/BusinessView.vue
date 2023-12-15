@@ -52,8 +52,6 @@ export default {
                     withCredentials: true,
                 });
 
-                console.log(response.data)
-
                 const businessData = response.data;
                 // assign tickets to TicketData
                 this.businessList = businessData;

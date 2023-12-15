@@ -165,18 +165,29 @@ export default {
     async addCommentToTicket() {
       try {
         let commentInput = this.ticketCommentInput;
-        let creatorName = this.ticketDetails.TicketCreatedBy;
+        
+        //Get creator name 
+        let response = await axios.get("http://localhost:8081/cookieInfo")
+        let creatorName = response.data.user
 
         //#region Generate Date
-        let currentDate = new Date();
-        let currentDateFormat = currentDate.toLocaleString();
-        let pattern = /(?<=, )[^,]+/;
+         // Get current Date
+        const currentDate = new Date();
 
-        let match = currentDateFormat.match(pattern);
+        const day = currentDate.getDate();
+        const month = currentDate.getMonth() + 1; // Months starts at 0, so add 1
+        const year = currentDate.getFullYear();
 
-        let originalDateAndTime = currentDateFormat.split(', ')[0];
-        let extractedValue = match[0];
-        let createDateFormat = `${originalDateAndTime}, KL:${extractedValue.replace(/\.\d+$/, '')}`;
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+
+        // If data is a number from 1 to 9, add a 0 in front
+        const formattedDay = day < 10 ? `0${day}` : day; 
+        const formattedMonth = month < 10 ? `0${month}` : month;
+        const formattedHours = hours < 10 ? `0${hours}` : hours;
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+        const currentDateFormat = `${formattedDay}/${formattedMonth}/${year}, KL:${formattedHours}.${formattedMinutes}`;
 
         //#endregion
 
@@ -184,7 +195,7 @@ export default {
         let newComment = {
           comment: commentInput,
           creator: creatorName,
-          createdDate: createDateFormat
+          createdDate: currentDateFormat
         };
 
         // Push the new comment object to the TicketComments array

@@ -62,7 +62,6 @@ export default {
                 const listData = response.data.Tickets;
                 // assign tickets to TicketData
                 this.ticketData = listData;
-                console.log(this.ticketData)
 
                 //Get userRole
                 this.userRole = response.data.role
